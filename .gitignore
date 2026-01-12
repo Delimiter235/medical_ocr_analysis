@@ -1,6 +1,19 @@
+# --- Private Data and Secrets ---
+# Raw and processed personal medical datasets
 data/
-test_output/
+# Local environmental variables
 .env
+
+# --- Build Artifacts and Outputs ---
+# Generated visualization results for test
+test_output/
+
+# --- Python Internals ---
+# Bytecode cache
 __pycache__/
+
+# --- Environment and Tooling ---
+# VS Code workspace settings
 .vscode/
+# Pyenv version file
 .python-version

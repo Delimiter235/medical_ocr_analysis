@@ -1,1 +1,17 @@
-# This txt file is prepared to record required libraries for this project.
+# --- Core Logic ---
+paddleocr>=2.7.0
+paddlepaddle>=2.6.0
+
+# --- Data Processing ---
+pandas
+numpy
+openpyxl
+
+# --- Visualization ---
+matplotlib
+seaborn
+
+# --- Utilities ---
+tqdm                    # Progress bar
+python-dotenv           # Environmental variables management
+opencv-python-headless  # Picture processing (headless edition for WSL)
