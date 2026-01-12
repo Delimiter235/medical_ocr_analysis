@@ -1,0 +1,6 @@
+data/
+test_output/
+.env
+__pycache__/
+.vscode/
+.python-version
