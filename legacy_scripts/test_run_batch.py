@@ -1,10 +1,12 @@
 from pathlib import Path
 from tqdm import tqdm
 import test_init_model
+import os
 
 
-input_dir = Path('./data/raw/images/serum_ferritin')
-output_dir = Path('./data/processed/json_files/serum_ferritin')
+basic_dir = os.path.abspath(os.getcwd())
+input_dir = Path(f'{basic_dir}/data/raw/images/blood_routine/')
+output_dir = Path(f'{basic_dir}/data/processed/json_files/blood_routine1')
 
 def run_batch():
     output_dir.mkdir(parents=True, exist_ok=True)

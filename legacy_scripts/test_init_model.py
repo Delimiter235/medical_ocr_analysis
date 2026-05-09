@@ -1,7 +1,9 @@
 from paddleocr import PaddleOCR
+import os
 
 
-test_path = './data/raw/images/serum_ferritin/2025_06_04_serum_ferritin.png'
+base_dir = os.path.abspath(os.getcwd())
+test_path = f'{base_dir}/data/raw/images/serum_ferritin/2025_06_04_serum_ferritin.png'
 
 def init_ocr():
     ocr = PaddleOCR(
