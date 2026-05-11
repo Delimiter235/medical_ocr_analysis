@@ -18,8 +18,8 @@ def ocr_json_write(ocr_data: list, output_dir: str) -> None:
     '''
     output_file = Path(output_dir)
     output_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_file, 'w') as json_file:
-        json.dump(ocr_data, json_file)
+    with open(output_file, 'w', encoding='utf-8') as json_file:
+        json.dump(ocr_data, json_file, ensure_ascii=False)
 
 
 def normalize_ocr_json(raw_data: dict) -> list:
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     print(type(raw_data_json))
     clean_data = normalize_ocr_json(raw_data_json)
     print(clean_data)
-    #ocr_json_write(clean_data, OUTPUT_DIR)
+    ocr_json_write(clean_data, OUTPUT_DIR)
 
     remove = input()
     if remove == 'remove':
