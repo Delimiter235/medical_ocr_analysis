@@ -1,10 +1,11 @@
 import json
+from typing import Dict, List, Any
 
 
 INPUT_DIR = './data/processed/json_files/serum_ferritin/2025_06_04_serum_ferritin_res.json'
 
 
-def ocr_json_read(input_dir: str) -> list | dict:
+def ocr_json_read(input_dir: str) -> List[Dict[str, Any]] | Dict[str, Any]:
     '''
     This function extracts python data structure from a JSON file defensively.
 

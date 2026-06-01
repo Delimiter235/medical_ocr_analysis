@@ -2,6 +2,7 @@ import json
 import os
 from pathlib import Path
 from common import ocr_json_read
+from typing import Any, Dict, List
 
 
 INPUT_DIR = './data/processed/json_files/serum_ferritin/2025_06_04_serum_ferritin_res.json'
@@ -22,7 +23,7 @@ def ocr_json_write(ocr_data: list, output_dir: str) -> None:
         json.dump(ocr_data, json_file, ensure_ascii=False)
 
 
-def normalize_ocr_json(raw_data: dict) -> list:
+def normalize_ocr_json(raw_data: Dict[str, Any]) -> list:
     '''
     This function optimizes the data structure of raw data and cleans the texts with low confidence score.
 
@@ -36,7 +37,6 @@ def normalize_ocr_json(raw_data: dict) -> list:
     clean_data = [
         {
             'text': t,
-            'score': s,
             'box': b
         }
         for t, s, b in zip(rec_texts, rec_scores, rec_boxes)
@@ -49,7 +49,10 @@ def normalize_ocr_json(raw_data: dict) -> list:
 if __name__ == '__main__':
     raw_data_json = ocr_json_read(INPUT_DIR)
     print(type(raw_data_json))
+
+    assert isinstance(raw_data_json, dict)
     clean_data = normalize_ocr_json(raw_data_json)
+
     print(clean_data)
     ocr_json_write(clean_data, OUTPUT_DIR)
 
