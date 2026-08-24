@@ -77,19 +77,10 @@ def find_header_keys_idx(data: list, input_dir: str) -> list[int] | None:
     '''
     header_keys = ['检验单号', '检验类型', '采集时间', '报告时间', '检测机构']
     idxs = []
-    devide_line_coords = find_devide(data, input_dir)
+    upper_devide_idx = find_devide_idx(data, input_dir)
 
-    if devide_line_coords is None:
-        return None
-    
-    y_min, _ = devide_line_coords
-    
-    for element_idx, element in enumerate(data):
-        if element['box'][1] >= y_min:
-            break
-        
     for key in header_keys:
-        tgt_idx = traversal_finder(key, data[0: element_idx])
+        tgt_idx = traversal_finder(key, data[0: upper_devide_idx])
             
         if tgt_idx is None:
             print(f'{key} cannot be found in {input_dir}')
@@ -113,7 +104,7 @@ def find_header(data: list, input_dir: str) -> list | None:
     if devide_line_idx is None:
         return None
     
-    header = data[0:devide_line_idx]
+    header = data[0: devide_line_idx]
 
     return header
 
