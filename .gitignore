@@ -1,6 +1,7 @@
 # --- Private Data and Secrets ---
 # Raw and processed personal medical datasets
 data/
+legacy_data/
 # Local environmental variables
 .env
 
@@ -17,3 +18,4 @@ __pycache__/
 .vscode/
 # Pyenv version file
 .python-version
+
