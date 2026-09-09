@@ -3,7 +3,10 @@ from typing import Any, Dict, List
 from config import Settings
 
 
-def normalize_json_data(data: Dict[str, Any], confidence_threshold: float) -> list:
+def normalize_json_data(
+        data: Dict[str, Any],
+        confidence_threshold: float,
+) -> List[Dict[str, Any]]:
     rec_texts = data['rec_texts']  # texts identified by paddleocr
     rec_scores = data['rec_scores']  # confidence scores
     rec_boxes = data['rec_boxes']  # coordinates of rectangle identification frame 
@@ -16,7 +19,8 @@ def normalize_json_data(data: Dict[str, Any], confidence_threshold: float) -> li
         for t, s, b in zip(rec_texts, rec_scores, rec_boxes)
         if s >= confidence_threshold
     ]
-
+    
+    #print(cleaned_data)
     return cleaned_data
 
 

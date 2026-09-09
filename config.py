@@ -29,13 +29,23 @@ class Settings(BaseSettings):
         return self.DATA_DIR / "result"
 
     # Hyper parameters
-    CONFIDENCE_THRESHOLD: float = Field(default=0.5)  # TODO: need description
-    HEADER_THRESHOLD_FACTOR: float = Field(default=1.5)
-    BODY_THRESHOLD_FACTOR: float = Field(default=1.5)
+    CONFIDENCE_THRESHOLD: float = Field(default=0.5) # TODO
+    HEADER_THRESHOLD_FACTOR: float = Field(default=1.5)  # Add desc
+    BODY_THRESHOLD_FACTOR: float = Field(default=0.5)
 
     # Header features
-    HEADER_KEYS: List[str] = Field(default_factory=lambda: ["检验单号", "检验类型", "采集时间", "报告时间", "检测机构"])
+    HEADER_KEYS: List[str] = Field(default_factory=lambda: [
+        "检验单号",
+        "检验类型",
+        "采集时间",
+        "报告时间",
+        "检测机构",
+    ])
     
-    DEVIDE_FEATURES: List[str] = Field(default_factory=lambda: ["检验项目", "测定结果", "参考范围"])
+    DEVIDE_FEATURES: List[str] = Field(default_factory=lambda: [
+        "检验项目",
+        "测定结果",
+        "参考范围",
+    ])
 
 

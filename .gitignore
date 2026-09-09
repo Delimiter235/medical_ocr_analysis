@@ -2,6 +2,8 @@
 # Raw and processed personal medical datasets
 data/
 legacy_data/
+legacy_scripts/
+
 # Local environmental variables
 .env
 
@@ -14,8 +16,6 @@ test_output/
 __pycache__/
 
 # --- Environment and Tooling ---
-# VS Code workspace settings
-.vscode/
 # Pyenv version file
 .python-version
 
