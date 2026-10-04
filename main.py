@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import List, Dict, Iterator, Any
-from schemas import ReportData
+
+from schemas import ReportData, validate_recognized_json
 from config import Settings
 from ocr_batch_processor import MedicalOCRRuner 
 from file_utils import read_json, write_json, get_categorized_output_path
@@ -15,10 +16,16 @@ def main():
     image_dir = settings.IMAGE_DIR
     recognized_json_dir: Path = settings.RECOGNIZED_JSON_DIR
     refactored_json_dir: Path = settings.REFACTORED_JSON_DIR
-    table_recognizer = MedicalOCRRuner(device="gpu")
+    table_recognizer = MedicalOCRRuner()
 
     # Table recognizing
-    table_recognizer.process_batch(image_dir, recognized_json_dir)
+    try:
+        table_recognizer.process_batch(
+            input_dir=image_dir,
+            output_dir=recognized_json_dir
+        )
+    except Exception as e:
+        print(f"{e}")
 
     # Parameters for merge_header_and_body
     confidence_threshold = settings.CONFIDENCE_THRESHOLD
@@ -34,23 +41,28 @@ def main():
         assert isinstance(parsed_json, dict)
         cleaned_data = normalize_json_data(parsed_json, confidence_threshold)
 
-        #test_data = sort_by_y_mid(cleaned_data, body_threshold_factor, devide_features[-1])
-        #print(test_data)
-        #break
-        refactored_data = merge_header_and_body(
-            data=cleaned_data,
-            header_keys=header_keys,
-            header_threshold_factor=header_threshold_factor,
-            body_threshold_factor=body_threshold_factor,
-            devide_features=devide_features,
+        try:
+            validate_recognized_json(cleaned_data)
+        except Exception as e:
+            print(f"{e}, file path: {json_file}")
+
+        refactored_data: ReportData = {"header":{}, "body":[]}
+        try:
+            refactored_data = merge_header_and_body(
+                data=cleaned_data,
+                header_keys=header_keys,
+                header_threshold_factor=header_threshold_factor,
+                body_threshold_factor=body_threshold_factor,
+                devide_features=devide_features,
+            )
+        except Exception as e:
+            print(f"{e}, file path: {json_file}")
+ 
+        refactored_json_file_dir = get_categorized_output_path(
+            refactored_json_dir,
+            json_file,
         )
-        #print(refactored_data)
-        if refactored_data is None:
-            return None
         
-        #print(json_file.name)
-        refactored_json_file_dir = get_categorized_output_path(refactored_json_dir, json_file)
-        #print(refactored_json_dir)
         write_json(refactored_data, refactored_json_file_dir)
 
 
