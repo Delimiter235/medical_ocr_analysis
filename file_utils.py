@@ -2,6 +2,7 @@ import re
 import json
 from typing import Dict, List, Any
 from pathlib import Path
+import pandas as pd
 
 from config import Settings
 from schemas import ReportData
