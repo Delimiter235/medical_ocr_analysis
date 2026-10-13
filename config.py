@@ -29,7 +29,7 @@ class Settings(BaseSettings):
         return self.DATA_DIR / "result"
 
     # Hyper parameters
-    CONFIDENCE_THRESHOLD: float = Field(default=0.5) # TODO
+    CONFIDENCE_THRESHOLD: float =  Field(default=0.5) # TODO
     HEADER_THRESHOLD_FACTOR: float = Field(default=1.5)  # Add desc
     BODY_THRESHOLD_FACTOR: float = Field(default=0.5)
 

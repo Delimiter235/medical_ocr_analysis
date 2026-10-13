@@ -33,7 +33,7 @@ def main():
     header_threshold_factor: float = settings.HEADER_THRESHOLD_FACTOR
     body_threshold_factor: float = settings.BODY_THRESHOLD_FACTOR
     devide_features: List[str] = settings.DEVIDE_FEATURES
-    
+
     # JSON processing
     recognized_json_files: Iterator[Path] = recognized_json_dir.glob('*.json')
     for json_file in recognized_json_files:
